@@ -21,6 +21,18 @@ End Sub
 Private Sub DueDateBox_AfterUpdate()
     DaysRemainingBox.Value = CDate(DueDateBox.Value) - Now()
     DaysRemainingBox.Value = Round(DaysRemainingBox.Value)
+        
+End Sub
+
+Private Sub SpinButton1_SpinDown()
+    DaysRemainingBox.Value = DaysRemainingBox.Value - 1
+    DaysRemainingBox_AfterUpdate
+    
+End Sub
+
+Private Sub SpinButton1_SpinUp()
+    DaysRemainingBox.Value = DaysRemainingBox.Value + 1
+    DaysRemainingBox_AfterUpdate
     
 End Sub
 
@@ -60,14 +72,14 @@ Private Sub CreateButton_Click()
     objSubject = SubjectBox.Value
     objBody = BodyBox.Value
     
-    newtaskform.Hide
+    Unload Me
     
 End Sub
 
 Private Sub CancelButton_Click()
     'Cancel Button
     canceled = True
-    newtaskform.Hide
+    Unload Me
     Exit Sub
     
 End Sub
