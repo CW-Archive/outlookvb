@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 Private Sub DaysRemainingBox_AfterUpdate()
     ' 7
     DueDateBox.Value = DaysRemainingBox.Value + Now()
+    
 End Sub
 
 Private Sub DueDateBox_AfterUpdate()

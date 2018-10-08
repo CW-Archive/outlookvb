@@ -1,5 +1,5 @@
 Attribute VB_Name = "newtask"
-'Option Explicit
+Option Explicit
 Public isMemo As Variant
 Public isPersonal As Variant
 Public isPlanUpdate As Variant
@@ -18,6 +18,7 @@ Sub NewTaskWithForm()
     Dim objTask As Outlook.TaskItem
     Dim objMail As Outlook.MailItem
     Dim listCategories As String
+    Dim objNamespace, objDestFolder
 
     'Dim catNamesArray As Variant
 
@@ -55,6 +56,7 @@ Sub NewTaskWithForm()
         'Show and init form
         newtaskform.Show
         
+        'Exit if the userform cancel button
         If canceled = True Then Exit Sub
               
         If isRFI = True Then listCategories = ", RFI"
