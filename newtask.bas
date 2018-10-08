@@ -17,9 +17,8 @@ Sub NewTaskWithForm()
     'New task button with userform
     Dim objTask As Outlook.TaskItem
     Dim objMail As Outlook.MailItem
-    Dim listCategories As String
+    Dim listCategories As String, objNewBody As String
     Dim objNamespace, objDestFolder
-
     'Dim catNamesArray As Variant
 
     'catNamesArray = Array("Architect PR / Memo", "Closeout", "Personal / Pet Projects", "Plan Update", "Pricing", "RFI", "Submittal")
@@ -47,7 +46,6 @@ Sub NewTaskWithForm()
         isSubmittal = IIf(isSubmittal, True, False)
         isPricing = IIf(isPricing > 0, True, False)
         isCloseout = IIf(isCloseout > 0, True, False)
-        
 
         objStartDate = objMail.ReceivedTime
         objSubject = objMail.Subject
@@ -69,13 +67,20 @@ Sub NewTaskWithForm()
         If Len(listCategories) > 0 Then listCategories = Right(listCategories, Len(listCategories) - 2)
         Debug.Print listCategories
         
+        'TODO: Add message sender info
+        'MailFrom = objMail.Sender & " | " & objMail.SenderEmailAddress
+        'Debug.Print MailFrom
+        
+        
+        objNewBody = "------- Description / Notes -------" & vbNewLine & vbNewLine & Left(objBody, 250) & vbNewLine & vbNewLine & "------- Attachments -------" & vbNewLine & vbNewLine
+        
         'Create Task
         With objTask
             .Subject = objSubject
             .StartDate = objStartDate
             .DueDate = objDueDate
             .Attachments.Add objMail
-            .Body = objBody
+            .Body = objNewBody
             .Categories = listCategories
             .Save
         End With
