@@ -55,7 +55,10 @@ Sub NewTaskWithForm()
         newtaskform.Show
         
         'Exit if the userform cancel button
-        If canceled = True Then Exit Sub
+        If canceled = True Then
+            canceled = False
+            Exit Sub
+        End If
               
         If isRFI = True Then listCategories = ", RFI"
         If isSubmittal = True Then listCategories = listCategories & ", Submittal"
